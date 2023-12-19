@@ -67,9 +67,11 @@
                     endfor; 
                 }
             }
+            $url = strtok($_SERVER['REQUEST_URI'], '?');
+            header('Location: '.$url);
+        }else{
+            $error = 'Error occured: User name and gender required.';
         }
-        $url = strtok($_SERVER['REQUEST_URI'], '?');
-        header('Location: '.$url);
     }
     ## delete ##
     if(isset($_GET['remove'])){
@@ -133,6 +135,9 @@
             height: 50px;
             width: 50px;
             border-radius: 10%;
+        }
+        .req{
+            color: red;
         }
     </style>
 </head>
@@ -202,12 +207,12 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="">User Name</label>
-                                <input type="text" name="username" id="username" class="form-control" placeholder="User Full Name">
+                                <label for="">User Name <span class="req">*</span></label>
+                                <input type="text" name="username" id="username" class="form-control" placeholder="User Full Name" require>
                             </div>
                             <div class="col-md-6">
-                                <label for="">Gender</label>
-                                <select name="gender" id="gender" class="form-control">
+                                <label for="">Gender <span class="req">*</span></label>
+                                <select name="gender" id="gender" class="form-control" require>
                                     <option selected readonly disabled>choose one</option>
                                     <option value="male">Male</option>
                                     <option value="female">Female</option>
